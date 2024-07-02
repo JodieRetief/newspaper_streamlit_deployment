@@ -38,8 +38,8 @@ def load_models():
     model_file = "list_best_model.pkl"
     vectorizer_file = "list_tfidf_vectorizer.pkl"
     
-    model = joblib.load(open(os.path.join("streamlit", model_file), "rb"))
-    vectorizer = joblib.load(open(os.path.join("streamlit", vectorizer_file), "rb"))
+    model = joblib.load(open(os.path.join("Streamlit", model_file), "rb"))
+    vectorizer = joblib.load(open(os.path.join("Streamlit", vectorizer_file), "rb"))
     
     return model, vectorizer
 
