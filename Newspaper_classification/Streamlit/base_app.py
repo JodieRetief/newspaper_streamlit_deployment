@@ -30,8 +30,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 # Load best models and vectorizers
-best_models = joblib.load('Streamlit/models/model_best_model.pkl')
-best_vectorizers = joblib.load('Streamlit/models/model_tfidf_vectorizer.pkl')
+best_models = joblib.load('Streamlit/models/list_best_model.pkl')
+best_vectorizers = joblib.load('Streamlit/models/list_tfidf_vectorizer.pkl')
 
 # Load category mapping
 category_df = pd.read_csv('category_df.csv')
