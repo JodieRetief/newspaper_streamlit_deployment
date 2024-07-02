@@ -23,8 +23,6 @@
 """
 # Streamlit dependencies
 
-pip install -r requirements.txt
-
 import streamlit as st
 import joblib
 import pandas as pd
