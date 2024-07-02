@@ -32,7 +32,7 @@ best_models = joblib.load('list_best_model.pkl')
 best_vectorizers = joblib.load('list_tfidf_vectorizer.pkl')
 
 # Load category mapping
-category_df = pd.read_csv('category_mapping.csv')
+category_df = pd.read_csv('category_df.csv')
 
 # The main function where we will build the actual app
 def main():
