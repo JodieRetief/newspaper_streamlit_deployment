@@ -102,7 +102,3 @@ Werkzeug==3.0.3
 widgetsnbextension==4.0.10
 wrapt==1.16.0
 zipp==3.19.2
-streamlit==1.36.0
-joblib
-pandas
-scikit-learn
