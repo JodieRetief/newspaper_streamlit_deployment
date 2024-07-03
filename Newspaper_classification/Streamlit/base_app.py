@@ -21,67 +21,46 @@
 	https://docs.streamlit.io/en/latest/
 
 """
-# Streamlit dependencies
 import streamlit as st
 import joblib
-import os
-
-# Data dependencies
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Load your raw data
-# Example: raw = pd.read_csv("streamlit/train.csv")
+# Load the saved models
+model_lr = joblib.load('LogisticRegression_best_model.pkl')
+model_svc = joblib.load('SVC_best_model.pkl')
+model_nb = joblib.load('MultinomialNB_best_model.pkl')
 
-# Define function to load models and vectorizers
-def load_models():
-    model_file = "list_best_model.pkl"
-    vectorizer_file = "list_tfidf_vectorizer.pkl"
-    
-    model = joblib.load(open(os.path.join("Streamlit", model_file), "rb"))
-    vectorizer = joblib.load(open(os.path.join("Streamlit", vectorizer_file), "rb"))
-    
-    return model, vectorizer
+# Load category mapping dataframe
+category_df = pd.read_csv('category_df.csv')  # Adjust the filename if necessary
 
-# The main function where we will build the actual app
+# Function to predict category
+def predict_category(model, text):
+    category_id = model.predict([text])[0]
+    category = category_df[category_df['category_id'] == category_id]['category'].values[0]
+    return category
+
+# Streamlit app
 def main():
-    """News Classifier App with Streamlit """
-    
-    # Creates a main title and subheader on your page -
-    # these are static across all pages
-    st.title("News Classifier")
-    st.subheader("Analyzing news articles")
-    
-    # Creating sidebar with selection box -
-    # you can create multiple pages this way
-    options = ["Prediction", "Information"]
-    selection = st.sidebar.selectbox("Choose Option", options)
-    
-    # Load models and vectorizers
-    model, vectorizer = load_models()
-    
-    # Building out the "Information" page
-    if selection == "Information":
-        st.info("General Information")
-        # You can read a markdown file from supporting resources folder
-        st.markdown("Some information here")
-    
-    # Building out the prediction page
-    if selection == "Prediction":
-        st.info("Prediction with ML Models")
-        # Creating a text box for user input
-        news_text = st.text_area("Enter Text", "Type Here")
-        
-        if st.button("Classify"):
-            # Transform user input with vectorizer
-            vect_text = vectorizer.transform([news_text])
-            
-            # Predict using model
-            prediction = model.predict(vect_text)
-            
-            # Display prediction
-            st.success(f"Text Categorized as: {prediction[0]}")
-    
-# Required to let Streamlit instantiate our web app  
+    st.title('News Article Category Prediction')
+
+    # User input for article excerpt
+    article_text = st.text_area('Enter the excerpt from the article:', height=200)
+
+    # Model selection dropdown
+    selected_model = st.selectbox('Select Model:', ('Logistic Regression', 'Support Vector Classifier', 'Multinomial Naive Bayes'))
+
+    # Prediction and display
+    if st.button('Predict'):
+        if selected_model == 'Logistic Regression':
+            prediction = predict_category(model_lr, article_text)
+        elif selected_model == 'Support Vector Classifier':
+            prediction = predict_category(model_svc, article_text)
+        elif selected_model == 'Multinomial Naive Bayes':
+            prediction = predict_category(model_nb, article_text)
+
+        st.success(f'Predicted Category: {prediction}')
+
+# Run the app
 if __name__ == '__main__':
     main()
+
