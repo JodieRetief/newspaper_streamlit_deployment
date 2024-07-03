@@ -24,14 +24,22 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import os
+
+# Setup folders
+current_dir = os.getcwd()
+lr_model_path = os.path.join(current_dir, 'LogisticRegression_best_model.pkl')
+svc_model_path = os.path.join(current_dir, 'SVC_best_model.pkl')
+nb_model_path = os.path.join(current_dir, 'MultinomialNB_best_model.pkl')
+data_path = os.path.join(current_dir, 'category_df.csv')
 
 # Load the saved models
-model_lr = joblib.load('LogisticRegression_best_model.pkl')
-model_svc = joblib.load('SVC_best_model.pkl')
-model_nb = joblib.load('MultinomialNB_best_model.pkl')
+model_lr = joblib.load(lr_model_path)
+model_svc = joblib.load(svc_model_path)
+model_nb = joblib.load(nb_model_path)
 
 # Load category mapping dataframe
-category_df = pd.read_csv('category_df.csv')  # Adjust the filename if necessary
+category_df = pd.read_csv(data_path)  # Adjust the filename if necessary
 
 # Function to predict category
 def predict_category(model, text):
