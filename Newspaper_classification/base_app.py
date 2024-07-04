@@ -30,34 +30,6 @@ import os
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Define function to load models and vectorizers
-def load_models():
-    model_file = "list_best_model.pkl"
-    vectorizer_file = "list_tfidf_vectorizer.pkl"
-    
-    model = joblib.load(open(os.path.join("Streamlit", model_file), "rb"))
-    vectorizer = joblib.load(open(os.path.join("Streamlit", vectorizer_file), "rb"))
-    
-    return model, vectorizer
-
-# Define function to display contact information
-def contact_us():
-    st.title("Contact Us")
-    st.subheader("Project Team Members")
-    
-    members = {
-        "Jodie Retief": "mojo.retief@gmail.com",
-        "Mahlatse Lelosa": "mahlatselelosa98@gmail.com",
-        "Mmapaseka Makgatla": "moswazipaseka@gmail.com",
-        "Adroit Masingita Hlungwani": "masingitasingita@gmail.com",
-        "Melody Msimango": "melodymsimango@gmail.com",
-        "Sakhumuzi Mchunu": "sakhumuzimchunu@gmail.com"
-    }
-    
-    for member, email in members.items():
-        st.write(f"**{member}:** {email}")
-
-# Main function where we build the app
 def main():
     """News Classifier App with Streamlit """
     
@@ -68,8 +40,8 @@ def main():
     
     # Creating sidebar with selection box -
     # you can create multiple pages this way
-    options = ["Prediction", "Information", "Contact Us"]
-    selection = st.sidebar.selectbox("Choose Option", options)
+    options = ["Information", "Prediction", "Contact Us"]
+    selection = st.sidebar.selectbox("Choose Option", options, index=0)
     
     # Building out the "Information" page
     if selection == "Information":
