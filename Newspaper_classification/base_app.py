@@ -30,9 +30,6 @@ import os
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Load your raw data
-# Example: raw = pd.read_csv("streamlit/train.csv")
-
 # Define function to load models and vectorizers
 def load_models():
     model_file = "list_best_model.pkl"
@@ -43,7 +40,24 @@ def load_models():
     
     return model, vectorizer
 
-# The main function where we will build the actual app
+# Define function to display contact information
+def contact_us():
+    st.title("Contact Us")
+    st.subheader("Project Team Members")
+    
+    members = {
+        "Jodie Retief": "mojo.retief@gmail.com",
+        "Mahlatse Lelosa": "mahlatselelosa98@gmail.com",
+        "Mmapaseka Makgatla": "moswazipaseka@gmail.com",
+        "Adroit Masingita Hlungwani": "masingitasingita@gmail.com",
+        "Melody Msimango": "melodymsimango@gmail.com",
+        "Sakhumuzi Mchunu": "sakhumuzimchunu@gmail.com"
+    }
+    
+    for member, email in members.items():
+        st.write(f"**{member}:** {email}")
+
+# Main function where we build the app
 def main():
     """News Classifier App with Streamlit """
     
@@ -54,34 +68,44 @@ def main():
     
     # Creating sidebar with selection box -
     # you can create multiple pages this way
-    options = ["Prediction", "Information"]
+    options = ["Prediction", "Information", "Contact Us"]
     selection = st.sidebar.selectbox("Choose Option", options)
-    
-    # Load models and vectorizers
-    model, vectorizer = load_models()
     
     # Building out the "Information" page
     if selection == "Information":
         st.info("General Information")
-        # You can read a markdown file from supporting resources folder
-        st.markdown("Some information here")
+        st.markdown("""
+        This web application analyzes news articles by classifying them into predefined categories 
+        such as Business, Technology, Sports, Education, and Entertainment. It was developed as a 
+        project for a data science course with ExploreAI (now called Sand Technologies).
+
+        **How to Use:**
+            - Select the "Prediction" option from the sidebar to classify news articles based on their content.
+            - Enter or paste the text of a news article into the text box provided (You can use the headline, description or content).
+            - Select the model you would like to use to classify the news article.
+            - Click the "Classify" button to see the predicted category of the article.
+        
+            **About the Models:**
+            - **Logistic Regression:** A linear model that performs well with text data. Accuracy: 98%
+            - **Multinomial Naive Bayes:** A probabilistic model suitable for text classification tasks. Accuracy: 97.7%
+            - **Random Forest:** An ensemble learning method that combines multiple decision trees. Accuracy: 97.6%
+        """)
+    
     
     # Building out the prediction page
-    if selection == "Prediction":
+    elif selection == "Prediction":
         st.info("Prediction with ML Models")
         # Creating a text box for user input
         news_text = st.text_area("Enter Text", "Type Here")
         
         if st.button("Classify"):
-            # Transform user input with vectorizer
-            vect_text = vectorizer.transform([news_text])
-            
-            # Predict using model
-            prediction = model.predict(vect_text)
-            
-            # Display prediction
-            st.success(f"Text Categorized as: {prediction[0]}")
+            # Placeholder for model prediction
+            st.success("Prediction Placeholder")
     
+    # Building out the "Contact Us" page
+    elif selection == "Contact Us":
+        contact_us()
+
 # Required to let Streamlit instantiate our web app  
 if __name__ == '__main__':
     main()
