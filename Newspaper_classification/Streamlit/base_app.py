@@ -44,7 +44,7 @@ def predict_category(model, text):
 
 # Function to display information page
 def display_information():
-    st.title("General Information")
+    st.subheader("General Information")
     st.markdown("""
     This web application analyzes news articles by classifying them into predefined categories 
     such as Business, Technology, Sports, Education, and Entertainment. It was developed as a 
@@ -64,8 +64,7 @@ def display_information():
 
 # Function to display contact us page
 def display_contact_us():
-    st.title("Contact Us")
-    st.subheader("Project Team Members")
+    st.subheader("Contact Us")
 
     members = {
         "Jodie Retief": "mojo.retief@gmail.com",
@@ -76,6 +75,7 @@ def display_contact_us():
         "Sakhumuzi Mchunu": "sakhumuzimchunu@gmail.com"
     }
 
+    st.write("Project Team Members:")
     for member, email in members.items():
         st.write(f"**{member}:** {email}")
 
