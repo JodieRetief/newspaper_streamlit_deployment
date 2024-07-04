@@ -91,7 +91,6 @@ def main():
             - **Random Forest:** An ensemble learning method that combines multiple decision trees. Accuracy: 97.6%
         """)
     
-    
     # Building out the prediction page
     elif selection == "Prediction":
         st.info("Prediction with ML Models")
