@@ -42,7 +42,7 @@ def predict_category(model, text):
 
 # Function to display information page
 def display_information():
-    st.info("General Information")
+    st.title("General Information")
     st.markdown("""
     This web application analyzes news articles by classifying them into predefined categories 
     such as Business, Technology, Sports, Education, and Entertainment. It was developed as a 
@@ -89,7 +89,7 @@ def main():
         display_information()
     elif page == "Contact Us":
         display_contact_us()
-    else:  # Default to Prediction page
+    elif page == "Prediction":  
         st.subheader("Predict the Category of a News Article")
         article_text = st.text_area("Enter the excerpt from the article:", height=200)
 
