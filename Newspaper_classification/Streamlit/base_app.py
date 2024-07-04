@@ -21,6 +21,8 @@
 	https://docs.streamlit.io/en/latest/
 
 """
+import pandas as pd
+
 # Streamlit dependencies
 import streamlit as st
 import joblib
